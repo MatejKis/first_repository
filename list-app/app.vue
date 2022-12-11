@@ -5,7 +5,7 @@
       <section v-for="person of persons" v-bind:key="person" v-bind:class="{'card-container':true,'card':true,'adult':getAge(person.birthday)>=18 }">
         <article class="info">
           <div class="name">{{person.fname}} {{person.lname}}</div>
-          <div class="birthday">{{person.birthday.getDate()}}.{{person.birthday.getMonth()}}.{{person.birthday.getFullYear()}} | 
+          <div class="birthday">{{person.birthday.getDate()}}.{{person.birthday.getMonth()+1}}.{{person.birthday.getFullYear()}} | 
             <span class="age">{{getAge(person.birthday)}} rokov</span></div>
         </article>
         <footer class="footer-card">
@@ -22,12 +22,12 @@ let persons = [
     {
         fname: "Magdalena",
         lname: "Mikulova",
-        birthday: new Date (2000, 1, 5)
+        birthday: new Date (2000, 0, 5)
     },
     {
         fname: "Mirka",
         lname: "Makovicova",
-        birthday: new Date (1992, 30, 2)
+        birthday: new Date (1992, 2, 30)
     },
     {
         fname: "Hugo",
@@ -37,7 +37,7 @@ let persons = [
     {
         fname: "Miki",
         lname: "Hric",
-        birthday: new Date (2004, 12, 24)
+        birthday: new Date (2004, 11, 24)
     },
     {
         fname: "Andrea",
@@ -55,9 +55,8 @@ const getAge = (birth) => {
     let currentDate = new Date();
     let difference = currentDate.getFullYear() - birth.getFullYear();
 
-    if (birth.getDate >= currentDate.getDate() && birth.getMonth() >= currentDate.getMonth()) return difference--;
+    if (birth.getDate() >= currentDate.getDate() && birth.getMonth() >= currentDate.getMonth()) return difference-1;
     else return difference;
-
 }
 
 </script>
@@ -86,8 +85,8 @@ const getAge = (birth) => {
         flex-grow: 1;
     }
     .card {
-        background: rgba(255,255,255, 1);
-        border: 1px solid #bbb;
+        background: rgb(232, 232, 232);
+        border: 1px solid rgb(218, 218, 218);
         color: #444;
         box-shadow: 0 3px 5px rgba(0,0,0,.2);
         border-top-width: 5px;
@@ -121,15 +120,20 @@ const getAge = (birth) => {
         text-align: center;
         transition: .5s;
         font-size: 1rem;
+        border-width: 3px;
+        border-right-style: inset;
+        border-bottom-style: inset;
     }
     .btn.edit {
         background: rgb(91, 236, 91);
+        border-color: rgb(39, 187, 39);
     }
     .btn.remove {
         background: red;
+        border-color: rgb(184, 19, 19);
     }
     .btn:hover {
-        opacity: .3;
+        filter: brightness(.6);
         cursor: pointer;;
     }
 </style>
